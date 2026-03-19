@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DEMO PURPOSE Computer Channel — Sahiwal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --black: #000000;
+  --off-black: #1d1d1f;
+  --white: #ffffff;
+  --page-bg: #f5f5f7;
+  --text-primary: #1d1d1f;
+  --text-secondary: #6e6e73;
+  --text-tertiary: #86868b;
+  --blue: #0071e3;
+  --blue-hover: #0077ed;
+  --border: #d2d2d7;
+  --card-bg: #ffffff;
+}
+html { scroll-behavior: smooth; font-size: 16px; }
+body { background: #fff; color: var(--off-black); font-family: 'Figtree', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { text-decoration: none; color: inherit; }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #f0f0f0; }
+::-webkit-scrollbar-thumb { background: #c7c7c7; border-radius: 4px; }
+
+/* BUTTONS */
+.btn { display: inline-flex; align-items: center; gap: 6px; border-radius: 980px; font-size: 17px; font-weight: 500; padding: 13px 24px; cursor: pointer; border: none; transition: all 0.2s ease; letter-spacing: -0.01em; font-family: inherit; }
+.btn-blue { background: var(--blue); color: #fff; }
+.btn-blue:hover { background: var(--blue-hover); }
+.btn-outline-white { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.4); }
+.btn-outline-white:hover { background: rgba(255,255,255,0.1); }
+.btn-white { background: #fff; color: var(--off-black); }
+.btn-white:hover { background: #f0f0f0; }
+.btn-link { background: none; color: var(--blue); font-size: 15px; font-weight: 500; padding: 0; display: inline-flex; align-items: center; gap: 3px; cursor: pointer; border: none; font-family: inherit; transition: opacity 0.15s; }
+.btn-link:hover { opacity: 0.7; }
+
+/* NAV */
+#nav { position: fixed; top: 0; left: 0; right: 0; z-index: 9999; height: 52px; display: flex; align-items: center; background: rgba(22,22,23,0.84); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid rgba(255,255,255,0.08); transition: background 0.3s, border-color 0.3s; }
+#nav.light { background: rgba(255,255,255,0.84); border-bottom-color: rgba(0,0,0,0.1); }
+.nav-inner { max-width: 980px; margin: 0 auto; width: 100%; padding: 0 22px; display: flex; align-items: center; justify-content: space-between; }
+.nav-logo { font-size: 17px; font-weight: 700; letter-spacing: -0.02em; color: rgba(255,255,255,0.9); display: flex; align-items: center; gap: 8px; }
+#nav.light .nav-logo { color: var(--off-black); }
+.nav-links { display: flex; gap: 24px; list-style: none; }
+.nav-links a { font-size: 13px; color: rgba(255,255,255,0.72); transition: color 0.15s; }
+#nav.light .nav-links a { color: var(--text-secondary); }
+.nav-links a:hover { color: #fff; }
+#nav.light .nav-links a:hover { color: var(--off-black); }
+.nav-cta { font-size: 13px; color: var(--blue); cursor: pointer; }
+
+/* HERO */
+#hero { background: #000; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 130px 22px 90px; position: relative; overflow: hidden; }
+#hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(0,113,227,0.2) 0%, transparent 65%); pointer-events: none; }
+.hero-eyebrow { font-size: 17px; font-weight: 600; color: var(--blue); margin-bottom: 18px; opacity: 0; animation: fadeUp 0.7s 0.1s ease forwards; }
+.hero-h1 { font-size: clamp(52px, 8vw, 96px); font-weight: 700; line-height: 1.03; letter-spacing: -0.03em; color: #fff; max-width: 900px; margin: 0 auto 24px; opacity: 0; animation: fadeUp 0.8s 0.2s ease forwards; }
+.hero-sub { font-size: clamp(19px, 2.5vw, 24px); font-weight: 400; color: rgba(255,255,255,0.6); line-height: 1.55; max-width: 580px; margin: 0 auto 44px; opacity: 0; animation: fadeUp 0.8s 0.35s ease forwards; }
+.hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.8s 0.5s ease forwards; }
+
+/* SHOWCASE GRID */
+.showcase { max-width: 960px; width: 100%; margin: 80px auto 0; display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; overflow: hidden; opacity: 0; animation: fadeUp 0.9s 0.65s ease forwards; }
+.showcase-cell { background: rgba(255,255,255,0.03); padding: 36px 22px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px; transition: background 0.2s; }
+.showcase-cell:hover { background: rgba(255,255,255,0.06); }
+.sc-icon { width: 52px; height: 52px; border-radius: 14px; background: rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: center; margin-bottom: 4px; }
+.sc-title { font-size: 15px; font-weight: 600; color: #fff; letter-spacing: -0.01em; }
+.sc-sub { font-size: 12px; color: rgba(255,255,255,0.4); }
+
+/* MARQUEE */
+.marquee-wrap { background: var(--blue); padding: 14px 0; overflow: hidden; }
+.marquee-track { display: flex; gap: 48px; white-space: nowrap; animation: marquee 22s linear infinite; }
+.marquee-track span { font-size: 13px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: rgba(255,255,255,0.82); display: inline-flex; align-items: center; gap: 10px; }
+.mdot { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.4); display: inline-block; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* SECTION */
+.sec { padding: 110px 22px; }
+.sec-inner { max-width: 980px; margin: 0 auto; }
+.sec-hdr { text-align: center; margin-bottom: 64px; }
+.eyebrow { font-size: 17px; font-weight: 600; color: var(--blue); display: block; margin-bottom: 10px; }
+.eyebrow-white { color: var(--blue); }
+.sec-h2 { font-size: clamp(32px, 5vw, 56px); font-weight: 700; letter-spacing: -0.025em; line-height: 1.06; }
+.sec-h2-white { color: #fff; }
+.sec-p { font-size: clamp(16px, 1.8vw, 20px); color: var(--text-secondary); line-height: 1.6; max-width: 520px; margin: 16px auto 0; }
+.sec-p-white { color: rgba(255,255,255,0.5); }
+
+/* PRODUCT GRID */
+.pgrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+.pcard { background: #fff; border: 1px solid rgba(0,0,0,0.07); border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.pcard:hover { transform: translateY(-5px); box-shadow: 0 24px 64px rgba(0,0,0,0.1); }
+.pcard-dark { background: #1c1c1e; border-color: rgba(255,255,255,0.07); }
+.pcard-visual { height: 200px; display: flex; align-items: center; justify-content: center; position: relative; }
+.pcard-body { padding: 22px 22px 0; flex: 1; display: flex; flex-direction: column; gap: 6px; }
+.pcard-brand { font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-tertiary); }
+.pcard-brand-w { color: rgba(255,255,255,0.3); }
+.pcard-name { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; color: var(--off-black); }
+.pcard-name-w { color: #fff; }
+.pcard-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.55; }
+.pcard-desc-w { color: rgba(255,255,255,0.48); }
+.pcard-specs { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+.spec { font-size: 11px; font-weight: 500; background: #f0f0f5; color: var(--text-secondary); padding: 4px 10px; border-radius: 980px; }
+.spec-d { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.5); }
+.pcard-foot { display: flex; align-items: center; justify-content: space-between; padding: 16px 22px 22px; margin-top: auto; }
+.price-from { font-size: 12px; color: var(--text-tertiary); margin-bottom: 2px; }
+.price-from-w { color: rgba(255,255,255,0.3); }
+.price-val { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; color: var(--blue); }
+.tag-pill { position: absolute; top: 14px; right: 14px; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 980px; letter-spacing: 0.01em; }
+.tag-blue { background: rgba(0,113,227,0.1); color: var(--blue); }
+.tag-green { background: rgba(52,211,153,0.12); color: #34d399; }
+.tag-purple { background: rgba(124,58,237,0.12); color: #a78bfa; }
+.tag-fresh { background: var(--blue); color: #fff; }
+
+/* FEATURE STRIP */
+.feat-strip { background: #fff; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 72px 22px; }
+.feat-grid { max-width: 980px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); }
+.feat-grid > * + * { border-left: 1px solid var(--border); }
+.feat-cell { padding: 28px 40px; text-align: center; }
+.feat-icon { width: 50px; height: 50px; border-radius: 14px; background: #f5f5f7; margin: 0 auto 18px; display: flex; align-items: center; justify-content: center; }
+.feat-cell h4 { font-size: 17px; font-weight: 700; letter-spacing: -0.015em; color: var(--off-black); margin-bottom: 8px; }
+.feat-cell p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+
+/* STATS */
+.stats-sec { background: #000; padding: 100px 22px; }
+.stats-grid { max-width: 980px; margin: 0 auto; display: grid; grid-template-columns: repeat(4,1fr); }
+.stat-cell { text-align: center; padding: 20px; }
+.stat-cell + .stat-cell { border-left: 1px solid rgba(255,255,255,0.1); }
+.stat-n { font-size: clamp(44px, 5vw, 72px); font-weight: 800; letter-spacing: -0.04em; color: #fff; display: block; line-height: 1; }
+.stat-l { font-size: 14px; color: rgba(255,255,255,0.38); margin-top: 8px; }
+
+/* MONITOR GRID */
+.mgrid { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; }
+.mcard { background: #fff; border: 1px solid rgba(0,0,0,0.07); border-radius: 20px; padding: 44px 36px; display: flex; gap: 28px; align-items: flex-start; transition: box-shadow 0.3s, transform 0.3s; }
+.mcard:hover { transform: translateY(-4px); box-shadow: 0 20px 56px rgba(0,0,0,0.09); }
+.m-icon { flex-shrink: 0; width: 72px; height: 72px; border-radius: 20px; background: #f5f5f7; display: flex; align-items: center; justify-content: center; }
+.mcard h4 { font-size: 21px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
+.mcard p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+.m-badge { display: inline-block; margin-top: 12px; font-size: 12px; font-weight: 600; color: var(--blue); background: rgba(0,113,227,0.08); padding: 4px 12px; border-radius: 980px; }
+
+/* ACC GRID */
+.agrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+.acard { background: #1c1c1e; border: 1px solid rgba(255,255,255,0.07); border-radius: 20px; padding: 40px 28px; text-align: center; transition: transform 0.25s; }
+.acard:hover { transform: translateY(-4px); }
+.a-icon { width: 66px; height: 66px; border-radius: 18px; background: rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+.acard h4 { font-size: 17px; font-weight: 700; letter-spacing: -0.015em; color: #fff; margin-bottom: 8px; }
+.acard p { font-size: 14px; color: rgba(255,255,255,0.44); line-height: 1.6; }
+
+/* CTA */
+.cta-sec { background: #000; padding: 130px 22px; text-align: center; }
+.cta-sec h2 { font-size: clamp(36px, 6vw, 68px); font-weight: 700; letter-spacing: -0.03em; color: #fff; line-height: 1.05; max-width: 700px; margin: 0 auto 20px; }
+.cta-sec p { font-size: clamp(17px, 2vw, 21px); color: rgba(255,255,255,0.55); max-width: 500px; margin: 0 auto 48px; line-height: 1.6; }
+.cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+/* CONTACT */
+.contact-sec { background: #f5f5f7; border-top: 1px solid var(--border); padding: 90px 22px; }
+.c-grid { max-width: 980px; margin: 44px auto 0; display: grid; grid-template-columns: repeat(3,1fr); }
+.c-cell { text-align: center; padding: 20px 28px; }
+.c-cell + .c-cell { border-left: 1px solid var(--border); }
+.c-icon-w { width: 46px; height: 46px; border-radius: 13px; background: #e8f0fe; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+.c-cell h4 { font-size: 15px; font-weight: 700; color: var(--off-black); margin-bottom: 6px; }
+.c-cell p, .c-cell a { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+.c-cell a { color: var(--blue); }
+.c-cell a:hover { text-decoration: underline; }
+
+/* FOOTER */
+footer { background: #f5f5f7; border-top: 1px solid var(--border); padding: 26px 22px; }
+.foot-inner { max-width: 980px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.foot-copy { font-size: 12px; color: var(--text-tertiary); }
+.foot-links { display: flex; gap: 18px; }
+.foot-links a { font-size: 12px; color: var(--text-tertiary); transition: color 0.15s; }
+.foot-links a:hover { color: var(--off-black); }
+
+/* WA */
+.wa { position: fixed; bottom: 24px; right: 24px; z-index: 9998; width: 54px; height: 54px; border-radius: 50%; background: #25d366; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.4); transition: transform 0.2s, box-shadow 0.2s; }
+.wa:hover { transform: scale(1.08); box-shadow: 0 8px 28px rgba(37,211,102,0.5); }
+
+/* DIVIDER */
+.div-line { height: 1px; background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent); }
+
+/* KEYFRAMES */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* SCROLL REVEAL */
+.sr { opacity: 0; transform: translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.sr.on { opacity: 1; transform: translateY(0); }
+.d1 { transition-delay: 0.08s; } .d2 { transition-delay: 0.16s; } .d3 { transition-delay: 0.24s; }
+
+/* ── 3D FLIP CARDS ─────────────────────────────── */
+.flip-sec { background: #000; padding: 110px 22px; }
+.flip-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; max-width: 980px; margin: 0 auto; perspective: 1200px; }
+.flip-wrap { height: 340px; perspective: 800px; cursor: pointer; }
+.flip-inner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 0.65s cubic-bezier(0.4,0.2,0.2,1); border-radius: 22px; }
+.flip-wrap:hover .flip-inner { transform: rotateY(180deg); }
+.flip-front, .flip-back { position: absolute; inset: 0; border-radius: 22px; backface-visibility: hidden; -webkit-backface-visibility: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 28px; overflow: hidden; }
+.flip-front { background: #1c1c1e; border: 1px solid rgba(255,255,255,0.07); }
+.flip-back { background: var(--blue); transform: rotateY(180deg); justify-content: center; align-items: center; text-align: center; gap: 14px; }
+.flip-front-top { position: absolute; top: 0; left: 0; right: 0; height: 55%; display: flex; align-items: center; justify-content: center; }
+.flip-brand-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 6px; }
+.flip-name { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; color: #fff; line-height: 1.2; }
+.flip-price-hint { font-size: 13px; color: rgba(255,255,255,0.4); margin-top: 4px; }
+.flip-hover-hint { position: absolute; top: 16px; right: 16px; width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; }
+.flip-back h3 { font-size: 22px; font-weight: 700; color: #fff; letter-spacing: -0.02em; }
+.flip-back ul { list-style: none; display: flex; flex-direction: column; gap: 8px; width: 100%; }
+.flip-back ul li { font-size: 14px; color: rgba(255,255,255,0.85); display: flex; align-items: center; gap: 8px; justify-content: center; }
+.flip-back ul li::before { content: '✓'; font-weight: 700; color: rgba(255,255,255,0.6); }
+.flip-back .flip-cta { display: inline-flex; align-items: center; gap: 6px; background: #fff; color: var(--blue); font-size: 14px; font-weight: 700; padding: 10px 22px; border-radius: 980px; margin-top: 6px; transition: opacity 0.2s; }
+.flip-back .flip-cta:hover { opacity: 0.9; }
+
+/* ── COMPARISON TABLE ──────────────────────────── */
+.cmp-sec { background: #f5f5f7; padding: 110px 22px; }
+.cmp-table { max-width: 860px; margin: 0 auto; border-radius: 20px; overflow: hidden; border: 1px solid var(--border); background: #fff; }
+.cmp-head { display: grid; grid-template-columns: 2fr 1.4fr 1.4fr; background: #fff; border-bottom: 1px solid var(--border); }
+.cmp-head-cell { padding: 20px 24px; font-size: 14px; font-weight: 700; letter-spacing: -0.01em; color: var(--text-secondary); }
+.cmp-head-cell.us { background: rgba(0,113,227,0.05); color: var(--blue); display: flex; align-items: center; gap: 8px; }
+.cmp-head-cell.us::after { content: '★ Recommended'; font-size: 11px; font-weight: 700; background: var(--blue); color: #fff; padding: 3px 8px; border-radius: 980px; letter-spacing: 0.02em; }
+.cmp-row { display: grid; grid-template-columns: 2fr 1.4fr 1.4fr; border-bottom: 1px solid rgba(0,0,0,0.05); transition: background 0.15s; }
+.cmp-row:last-child { border-bottom: none; }
+.cmp-row:hover { background: #fafafa; }
+.cmp-cell { padding: 16px 24px; font-size: 14px; color: var(--off-black); display: flex; align-items: center; }
+.cmp-cell.feature { font-weight: 500; color: var(--text-secondary); font-size: 13px; }
+.cmp-cell.us-val { background: rgba(0,113,227,0.03); font-weight: 600; color: var(--off-black); }
+.cmp-yes { color: #16a34a; font-size: 18px; }
+.cmp-no { color: #d1d5db; font-size: 18px; }
+.cmp-partial { color: #f59e0b; font-size: 13px; font-weight: 500; }
+
+/* ── TESTIMONIALS ──────────────────────────────── */
+.testi-sec { background: #fff; padding: 110px 22px; }
+.trust-logos { display: flex; gap: 40px; justify-content: center; align-items: center; flex-wrap: wrap; margin-bottom: 72px; }
+.trust-logo { display: flex; align-items: center; gap: 10px; padding: 14px 28px; border: 1px solid var(--border); border-radius: 12px; color: var(--text-tertiary); font-size: 15px; font-weight: 700; letter-spacing: -0.01em; transition: border-color 0.2s, color 0.2s; }
+.trust-logo:hover { border-color: var(--blue); color: var(--off-black); }
+.testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; max-width: 980px; margin: 0 auto; }
+.testi-card { background: #f5f5f7; border-radius: 18px; padding: 28px; display: flex; flex-direction: column; gap: 14px; border: 1px solid transparent; transition: border-color 0.2s, transform 0.25s; }
+.testi-card:hover { border-color: var(--border); transform: translateY(-3px); }
+.testi-stars { color: #f59e0b; font-size: 15px; letter-spacing: 2px; }
+.testi-text { font-size: 15px; color: var(--off-black); line-height: 1.65; font-style: italic; }
+.testi-author { display: flex; align-items: center; gap: 12px; margin-top: auto; }
+.testi-avatar { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; color: #fff; flex-shrink: 0; }
+.testi-name { font-size: 14px; font-weight: 700; color: var(--off-black); }
+.testi-role { font-size: 12px; color: var(--text-tertiary); margin-top: 1px; }
+
+/* RESPONSIVE */
+@media (max-width: 820px) {
+  .flip-grid { grid-template-columns: 1fr; }
+  .cmp-table { font-size: 13px; }
+  .testi-grid { grid-template-columns: 1fr; }
+  .trust-logos { gap: 12px; }
+
+  .nav-links { display: none; }
+  .showcase { grid-template-columns: 1fr; }
+  .showcase-cell + .showcase-cell { border-top: 1px solid rgba(255,255,255,0.1); }
+  .pgrid, .mgrid, .agrid { grid-template-columns: 1fr; }
+  .feat-grid { grid-template-columns: 1fr; }
+  .feat-grid > * + * { border-left: none; border-top: 1px solid var(--border); }
+  .stats-grid { grid-template-columns: repeat(2,1fr); }
+  .stat-cell:nth-child(3) { border-left: none; }
+  .c-grid { grid-template-columns: 1fr; }
+  .c-cell + .c-cell { border-left: none; border-top: 1px solid var(--border); }
+  .mcard { flex-direction: column; }
+  .sticky-bar { display: flex; }
+  .cmp-head-cell.us::after { content: '★'; }
+}
+
+/* ── PAGE LOADER ────────────────────────────────── */
+#page-loader {
+  position: fixed; inset: 0; z-index: 99999;
+  background: #000; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 28px;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+#page-loader.hide { opacity: 0; visibility: hidden; pointer-events: none; }
+.loader-logo { font-size: 22px; font-weight: 800; letter-spacing: -0.03em; color: #fff; display: flex; align-items: center; gap: 10px; opacity: 0; animation: fadeIn 0.4s 0.2s ease forwards; }
+.loader-bar-wrap { width: 200px; height: 2px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; opacity: 0; animation: fadeIn 0.4s 0.3s ease forwards; }
+.loader-bar { height: 100%; width: 0%; background: var(--blue); border-radius: 2px; transition: width 0.05s linear; }
+.loader-pct { font-size: 12px; color: rgba(255,255,255,0.3); font-weight: 500; letter-spacing: 0.04em; opacity: 0; animation: fadeIn 0.4s 0.4s ease forwards; }
+
+/* ── FAQ ────────────────────────────────────────── */
+.faq-sec { background: #f5f5f7; padding: 110px 22px; }
+.faq-list { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border); border-radius: 18px; overflow: hidden; background: #fff; }
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-item:last-child { border-bottom: none; }
+.faq-q { width: 100%; background: none; border: none; padding: 22px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; cursor: pointer; text-align: left; font-family: inherit; transition: background 0.15s; }
+.faq-q:hover { background: #fafafa; }
+.faq-q-text { font-size: 16px; font-weight: 600; color: var(--off-black); letter-spacing: -0.01em; line-height: 1.4; }
+.faq-icon { width: 28px; height: 28px; border-radius: 50%; background: var(--page-bg); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.2s, transform 0.3s; }
+.faq-item.open .faq-icon { background: var(--blue); transform: rotate(45deg); }
+.faq-item.open .faq-icon svg { stroke: #fff; }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1); }
+.faq-a-inner { padding: 0 24px 22px; font-size: 15px; color: var(--text-secondary); line-height: 1.7; }
+.faq-item.open .faq-a { max-height: 300px; }
+
+/* ── STICKY BOTTOM BAR (mobile) ─────────────────── */
+.sticky-bar {
+  display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 9990;
+  background: rgba(255,255,255,0.92); backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(0,0,0,0.08);
+  padding: 10px 16px 10px; gap: 10px;
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.08);
+}
+.sticky-btn {
+  flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 13px 10px; border-radius: 12px; font-size: 15px; font-weight: 700;
+  font-family: inherit; border: none; cursor: pointer; letter-spacing: -0.01em;
+  text-decoration: none; transition: opacity 0.2s;
+}
+.sticky-btn:active { opacity: 0.8; }
+.sticky-call { background: #f5f5f7; color: var(--off-black); border: 1px solid var(--border); }
+.sticky-wa { background: #25d366; color: #fff; }
+
+/* ── MAPS ───────────────────────────────────────── */
+.map-wrap { max-width: 980px; margin: 48px auto 0; border-radius: 20px; overflow: hidden; border: 1px solid var(--border); height: 340px; background: #e8eaed; position: relative; }
+.map-wrap iframe { width: 100%; height: 100%; border: none; display: block; }
+.map-overlay-badge { position: absolute; top: 16px; left: 16px; z-index: 10; background: #fff; border-radius: 10px; padding: 10px 14px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; color: var(--off-black); }
+
+/* ── SPECIAL OFFER BANNER ───────────────────────── */
+#offer-banner { background: linear-gradient(90deg,#0055b3,#0071e3,#0055b3); background-size:200% 100%; animation:shimmer 3s linear infinite; padding:11px 22px; text-align:center; position:relative; z-index:200; }
+@keyframes shimmer { 0%{background-position:0% 0%} 100%{background-position:200% 0%} }
+.offer-text { font-size:13px; font-weight:600; color:#fff; letter-spacing:0.01em; display:inline-flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:center; }
+.offer-pill { background:rgba(255,255,255,0.18); border:1px solid rgba(255,255,255,0.3); padding:3px 10px; border-radius:980px; font-size:11px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; }
+#offer-close { position:absolute; right:16px; top:50%; transform:translateY(-50%); background:none; border:none; color:rgba(255,255,255,0.6); cursor:pointer; font-size:18px; line-height:1; padding:4px; transition:color 0.2s; }
+#offer-close:hover { color:#fff; }
+
+/* ── HOW IT WORKS ───────────────────────────────── */
+.hiw-sec { background:#000; padding:110px 22px; }
+.hiw-grid { max-width:860px; margin:0 auto; display:grid; grid-template-columns:1fr auto 1fr auto 1fr; align-items:start; }
+.hiw-step { text-align:center; display:flex; flex-direction:column; align-items:center; gap:18px; }
+.hiw-num { width:64px; height:64px; border-radius:50%; border:1.5px solid rgba(255,255,255,0.15); display:flex; align-items:center; justify-content:center; }
+.hiw-num-inner { width:44px; height:44px; border-radius:50%; background:rgba(0,113,227,0.15); border:1px solid rgba(0,113,227,0.3); display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:800; color:var(--blue); font-family:'Figtree',sans-serif; }
+.hiw-title { font-size:17px; font-weight:700; color:#fff; letter-spacing:-0.015em; }
+.hiw-desc { font-size:13px; color:rgba(255,255,255,0.4); line-height:1.6; max-width:180px; }
+.hiw-arrow { color:rgba(255,255,255,0.15); padding:0 10px; margin-top:22px; display:flex; align-items:center; }
+
+/* ── DARK MODE ──────────────────────────────────── */
+.dm-toggle { display:flex; align-items:center; gap:0; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); border-radius:980px; padding:6px 8px; cursor:pointer; transition:background 0.2s; }
+#nav.light .dm-toggle { background:rgba(0,0,0,0.05); border-color:rgba(0,0,0,0.1); }
+body.dark-mode { --off-black:#f5f5f7; --text-primary:#f5f5f7; --text-secondary:#98989d; --text-tertiary:#6e6e73; --border:#3a3a3c; }
+body.dark-mode .pcard:not(.pcard-dark) { background:#1c1c1e; border-color:rgba(255,255,255,0.08); }
+body.dark-mode .pcard-name { color:#f5f5f7; }
+body.dark-mode .pcard-desc { color:rgba(255,255,255,0.5); }
+body.dark-mode .spec { background:rgba(255,255,255,0.07); color:rgba(255,255,255,0.5); }
+body.dark-mode .feat-strip { background:#111; border-color:rgba(255,255,255,0.07); }
+body.dark-mode .feat-grid>*+* { border-left-color:rgba(255,255,255,0.07); }
+body.dark-mode .feat-icon { background:rgba(255,255,255,0.06); }
+body.dark-mode .feat-cell h4 { color:#f5f5f7; }
+body.dark-mode .faq-sec { background:#111; }
+body.dark-mode .faq-list { background:#1c1c1e; border-color:rgba(255,255,255,0.08); }
+body.dark-mode .faq-item { border-bottom-color:rgba(255,255,255,0.06); }
+body.dark-mode .faq-q:hover { background:rgba(255,255,255,0.04); }
+body.dark-mode .faq-q-text { color:#f5f5f7; }
+body.dark-mode .faq-icon { background:rgba(255,255,255,0.07); }
+body.dark-mode .faq-a-inner { color:rgba(255,255,255,0.5); }
+body.dark-mode .sec-h2:not(.sec-h2-white) { color:#f5f5f7; }
+body.dark-mode .sec-p:not(.sec-p-white) { color:rgba(255,255,255,0.5); }
+body.dark-mode .cmp-sec,.body.dark-mode .faq-sec { background:#0a0a0a !important; }
+body.dark-mode .cmp-table { background:#1c1c1e; border-color:rgba(255,255,255,0.08); }
+body.dark-mode .cmp-head { background:#1c1c1e; border-color:rgba(255,255,255,0.08); }
+body.dark-mode .cmp-row { border-bottom-color:rgba(255,255,255,0.05); }
+body.dark-mode .cmp-row:hover { background:rgba(255,255,255,0.03); }
+body.dark-mode .cmp-cell { color:rgba(255,255,255,0.7); }
+body.dark-mode .cmp-head-cell { color:rgba(255,255,255,0.4); }
+body.dark-mode .testi-sec { background:#111 !important; }
+body.dark-mode .testi-card { background:#1c1c1e; border-color:rgba(255,255,255,0.07); }
+body.dark-mode .testi-text { color:rgba(255,255,255,0.7); }
+body.dark-mode .testi-name { color:#f5f5f7; }
+body.dark-mode .mcard { background:#1c1c1e; border-color:rgba(255,255,255,0.07); }
+body.dark-mode .mcard h4 { color:#f5f5f7; }
+body.dark-mode .m-icon { background:rgba(255,255,255,0.06); }
+body.dark-mode .trust-logo { border-color:rgba(255,255,255,0.1); color:rgba(255,255,255,0.4); }
+body.dark-mode footer { background:#0a0a0a; border-color:rgba(255,255,255,0.07); }
+body.dark-mode .foot-copy,.body.dark-mode .foot-links a { color:rgba(255,255,255,0.3); }
+body.dark-mode .contact-sec { background:#0a0a0a !important; }
+body.dark-mode .c-icon-w { background:rgba(0,113,227,0.12); }
+body.dark-mode .sticky-bar { background:rgba(28,28,30,0.95); border-top-color:rgba(255,255,255,0.08); }
+body.dark-mode .sticky-call { background:#2c2c2e; color:#f5f5f7; border-color:rgba(255,255,255,0.1); }
+body.dark-mode #nav.light { background:rgba(28,28,30,0.92) !important; border-bottom-color:rgba(255,255,255,0.08) !important; }
+body.dark-mode #nav.light .nav-logo { color:#f5f5f7; }
+body.dark-mode #nav.light .nav-links a { color:rgba(255,255,255,0.6); }
+body.dark-mode .map-overlay-badge { background:#2c2c2e; color:#f5f5f7; }
+
+/* ── BACK TO TOP ────────────────────────────────── */
+#btt { position:fixed; bottom:88px; right:24px; z-index:9997; width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,0.92); border:1px solid rgba(0,0,0,0.1); box-shadow:0 4px 16px rgba(0,0,0,0.12); display:flex; align-items:center; justify-content:center; cursor:pointer; opacity:0; transform:translateY(10px); transition:opacity 0.3s,transform 0.3s; pointer-events:none; }
+#btt.show { opacity:1; transform:translateY(0); pointer-events:all; }
+#btt:hover { box-shadow:0 6px 20px rgba(0,0,0,0.18); }
+body.dark-mode #btt { background:#2c2c2e; border-color:rgba(255,255,255,0.1); }
+
+/* ── COOKIE BANNER ──────────────────────────────── */
+#cookie-banner { position:fixed; bottom:24px; left:24px; z-index:9996; max-width:360px; background:#fff; border:1px solid var(--border); border-radius:18px; padding:22px; box-shadow:0 12px 40px rgba(0,0,0,0.12); opacity:0; transform:translateY(14px); transition:opacity 0.4s ease,transform 0.4s ease; pointer-events:none; }
+#cookie-banner.show { opacity:1; transform:translateY(0); pointer-events:all; }
+body.dark-mode #cookie-banner { background:#1c1c1e; border-color:rgba(255,255,255,0.1); }
+.cookie-icon { font-size:22px; margin-bottom:8px; }
+.cookie-title { font-size:15px; font-weight:700; color:var(--off-black); margin-bottom:5px; }
+.cookie-text { font-size:13px; color:var(--text-secondary); line-height:1.6; margin-bottom:14px; }
+.cookie-btns { display:flex; gap:8px; }
+.cookie-accept { flex:1; background:var(--blue); color:#fff; border:none; padding:10px; border-radius:10px; font-size:14px; font-weight:600; cursor:pointer; font-family:inherit; transition:background 0.2s; }
+.cookie-accept:hover { background:var(--blue-hover); }
+.cookie-decline { background:#f5f5f7; color:var(--text-secondary); border:1px solid var(--border); padding:10px 14px; border-radius:10px; font-size:14px; cursor:pointer; font-family:inherit; }
+body.dark-mode .cookie-decline { background:#2c2c2e; border-color:rgba(255,255,255,0.1); color:rgba(255,255,255,0.5); }
+body.dark-mode .cookie-title { color:#f5f5f7; }
+@media(max-width:820px){ #cookie-banner{left:12px;right:12px;max-width:none;bottom:88px;} .hiw-grid{grid-template-columns:1fr;gap:36px;} .hiw-arrow{display:none;} .spec-cmp-grid{grid-template-columns:1fr!important;} }
+
+/* ── TYPEWRITER ─────────────────────────────────── */
+.typewriter-cursor{display:inline-block;width:3px;height:0.82em;background:#fff;margin-left:3px;vertical-align:middle;animation:blink .75s step-end infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* ── PARALLAX ───────────────────────────────────── */
+#hero{overflow:hidden;}
+.parallax-layer{will-change:transform;}
+
+/* ── STOCK TOGGLE ───────────────────────────────── */
+.stock-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.stock-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:4px 10px;border-radius:980px;letter-spacing:.03em;transition:all .25s;}
+.stock-badge.in{background:rgba(22,163,74,.1);color:#16a34a;border:1px solid rgba(22,163,74,.2);}
+.stock-badge.out{background:rgba(239,68,68,.1);color:#ef4444;border:1px solid rgba(239,68,68,.2);}
+.sdot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.sdot.in{background:#16a34a;animation:pg 1.8s ease infinite;}
+.sdot.out{background:#ef4444;}
+@keyframes pg{0%,100%{box-shadow:0 0 0 2px rgba(22,163,74,.25)}50%{box-shadow:0 0 0 5px rgba(22,163,74,.06)}}
+.stgl{background:none;border:1px solid var(--border);border-radius:980px;font-size:10px;color:var(--text-tertiary);padding:2px 8px;cursor:pointer;font-family:inherit;transition:all .2s;}
+.stgl:hover{border-color:var(--blue);color:var(--blue);}
+
+/* ── SPEC COMPARE ───────────────────────────────── */
+.spc-sec{background:#f5f5f7;padding:110px 22px;}
+body.dark-mode .spc-sec{background:#0a0a0a!important;}
+.spc-selects{display:grid;grid-template-columns:1fr 40px 1fr;gap:12px;align-items:center;margin-bottom:24px;}
+.spc-selects select{width:100%;padding:13px 16px;border:1px solid var(--border);border-radius:12px;font-size:15px;font-weight:500;font-family:inherit;color:var(--off-black);background:#fff;appearance:none;cursor:pointer;transition:border-color .2s;}
+.spc-selects select:focus{outline:none;border-color:var(--blue);}
+body.dark-mode .spc-selects select{background:#1c1c1e;color:#f5f5f7;border-color:rgba(255,255,255,.1);}
+.vs-ball{width:40px;height:40px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.spec-cmp-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.spc-card{background:#fff;border:1px solid var(--border);border-radius:18px;overflow:hidden;}
+body.dark-mode .spc-card{background:#1c1c1e;border-color:rgba(255,255,255,.08);}
+.spc-card-head{padding:20px 22px 14px;border-bottom:1px solid var(--border);}
+body.dark-mode .spc-card-head{border-bottom-color:rgba(255,255,255,.07);}
+.spc-brand{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:3px;}
+.spc-name{font-size:18px;font-weight:700;letter-spacing:-.02em;color:var(--off-black);}
+body.dark-mode .spc-name{color:#f5f5f7;}
+.spc-price{font-size:16px;font-weight:700;color:var(--blue);margin-top:3px;}
+.spc-rows{padding:4px 0;}
+.spc-row{display:flex;align-items:center;justify-content:space-between;padding:10px 22px;border-bottom:1px solid rgba(0,0,0,.04);}
+body.dark-mode .spc-row{border-bottom-color:rgba(255,255,255,.04);}
+.spc-row:last-child{border-bottom:none;}
+.spc-lbl{font-size:12px;color:var(--text-tertiary);font-weight:500;}
+.spc-val{font-size:13px;font-weight:600;color:var(--off-black);text-align:right;}
+body.dark-mode .spc-val{color:#f5f5f7;}
+.spc-val.good{color:#16a34a;}
+.spc-val.best{color:var(--blue);}
+.spc-foot{padding:14px 22px;border-top:1px solid var(--border);}
+body.dark-mode .spc-foot{border-top-color:rgba(255,255,255,.07);}
+
+/* ── CONFETTI ───────────────────────────────────── */
+.cp{position:fixed;width:9px;height:9px;top:-12px;border-radius:2px;pointer-events:none;z-index:99999;animation:cf linear forwards;}
+@keyframes cf{0%{transform:translateY(0) rotate(0deg);opacity:1}100%{transform:translateY(105vh) rotate(720deg);opacity:0}}
+</style>
+</head>
+<body>
+
+<!-- SPECIAL OFFER BANNER -->
+<div id="offer-banner">
+  <p class="offer-text">
+    <span class="offer-pill">🔥 Limited Time</span>
+    Bulk order karo 10+ units — <strong>Free Delivery + Setup</strong> across Sahiwal!
+    <span class="offer-pill">Ask on WhatsApp</span>
+  </p>
+  <button id="offer-close" onclick="document.getElementById('offer-banner').style.display='none'" title="Close">×</button>
+</div>
+
+<!-- BACK TO TOP -->
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1d1d1f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<!-- COOKIE BANNER -->
+<div id="cookie-banner">
+  <div class="cookie-icon">🍪</div>
+  <div class="cookie-title">We use cookies</div>
+  <div class="cookie-text">This website uses cookies to improve your experience and help us understand how visitors use our site.</div>
+  <div class="cookie-btns">
+    <button class="cookie-accept" onclick="hideCookie()">Accept All</button>
+    <button class="cookie-decline" onclick="hideCookie()">Decline</button>
+  </div>
+</div>
+
+<!-- PAGE LOADER -->
+<div id="page-loader">
+  <div class="loader-logo">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+    Computer Channel
+  </div>
+  <div class="loader-bar-wrap"><div class="loader-bar" id="lbar"></div></div>
+  <div class="loader-pct" id="lpct">0%</div>
+</div>
+
+<!-- WA FLOAT -->
+<a class="wa" href="https://wa.me/924044467725" title="WhatsApp" onclick="fireConfetti(event)">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      Computer Channel
+    </a>
+    <ul class="nav-links">
+      <li><a href="#laptops">Laptops</a></li>
+      <li><a href="#desktops">Desktops</a></li>
+      <li><a href="#monitors">Monitors</a></li>
+      <li><a href="#accessories">Accessories</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a class="nav-cta" href="https://wa.me/924044467725">Get a Quote</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="parallax-layer" id="parallax-bg" style="position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(0,113,227,0.2) 0%,transparent 65%);pointer-events:none;"></div>
+  <p class="hero-eyebrow parallax-layer" id="parallax-text">Computer Channel Sahiwal</p>
+  <h1 class="hero-h1 parallax-layer" id="parallax-h1">The IT Solutions<br/><span id="typewriter-text">Provider</span><span class="typewriter-cursor"></span>.</h1>
+  <p class="hero-sub parallax-layer">Your Trusted Partner for Branded Laptops &amp; Workstations in Sahiwal. Corporate-grade hardware. Fresh imports. Bulk orders welcome.</p>
+  <div class="hero-btns parallax-layer">
+    <a href="#laptops" class="btn btn-blue">Explore Products <i data-lucide="arrow-right" style="width:16px;height:16px;"></i></a>
+    <a href="https://wa.me/924044467725" class="btn btn-outline-white wa-confetti" onclick="fireConfetti(event)"><i data-lucide="message-circle" style="width:16px;height:16px;"></i> WhatsApp Us</a>
+  </div>
+  <div class="showcase">
+    <div class="showcase-cell">
+      <div class="sc-icon"><i data-lucide="laptop-2" style="width:26px;height:26px;color:rgba(255,255,255,0.7);"></i></div>
+      <div class="sc-title">Business Laptops</div>
+      <div class="sc-sub">HP Elite · Dell Latitude · ThinkPad</div>
+    </div>
+    <div class="showcase-cell" style="border-left:1px solid rgba(255,255,255,0.1);border-right:1px solid rgba(255,255,255,0.1);">
+      <div class="sc-icon"><i data-lucide="monitor" style="width:26px;height:26px;color:rgba(255,255,255,0.7);"></i></div>
+      <div class="sc-title">Desktop PCs</div>
+      <div class="sc-sub">OptiPlex · ProDesk · Precision</div>
+    </div>
+    <div class="showcase-cell">
+      <div class="sc-icon"><i data-lucide="package" style="width:26px;height:26px;color:rgba(255,255,255,0.7);"></i></div>
+      <div class="sc-title">Accessories</div>
+      <div class="sc-sub">Chargers · Keyboards · Backpacks</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>Open Box &amp; Fresh Imports <span class="mdot"></span></span><span>Bulk Orders Welcome <span class="mdot"></span></span><span>HP Certified Stock <span class="mdot"></span></span><span>Dell Authorized <span class="mdot"></span></span><span>Lenovo ThinkPad Series <span class="mdot"></span></span><span>Schools &amp; Offices <span class="mdot"></span></span><span>Sahiwal · High Street <span class="mdot"></span></span>
+    <span>Open Box &amp; Fresh Imports <span class="mdot"></span></span><span>Bulk Orders Welcome <span class="mdot"></span></span><span>HP Certified Stock <span class="mdot"></span></span><span>Dell Authorized <span class="mdot"></span></span><span>Lenovo ThinkPad Series <span class="mdot"></span></span><span>Schools &amp; Offices <span class="mdot"></span></span><span>Sahiwal · High Street <span class="mdot"></span></span>
+  </div>
+</div>
+
+<!-- 3D FLIP SHOWCASE -->
+<section class="flip-sec">
+  <div class="sec-inner">
+    <div class="sec-hdr sr">
+      <span class="eyebrow">Featured Products</span>
+      <h2 class="sec-h2 sec-h2-white">Hover to explore.</h2>
+      <p class="sec-p sec-p-white">Our three most popular products — flip each card to see full specs and pricing.</p>
+    </div>
+    <div class="flip-grid">
+
+      <!-- Card 1: HP EliteBook -->
+      <div class="flip-wrap sr d1">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <div class="flip-hover-hint"><i data-lucide="rotate-cw" style="width:14px;height:14px;color:rgba(255,255,255,0.4);"></i></div>
+            <div class="flip-front-top">
+              <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="13" rx="2"/><path d="M8 21h8m-4-5v5"/></svg>
+            </div>
+            <div class="flip-brand-tag">HP</div>
+            <div class="flip-name">EliteBook 840<br/>G5 / G6</div>
+            <div class="flip-price-hint">From PKR 55,000</div>
+          </div>
+          <div class="flip-back">
+            <h3>EliteBook 840</h3>
+            <ul>
+              <li>Intel Core i5 8th Gen</li>
+              <li>8GB DDR4 RAM</li>
+              <li>256GB NVMe SSD</li>
+              <li>14" FHD Display</li>
+              <li>Military-grade build</li>
+            </ul>
+            <a href="https://wa.me/924044467725?text=Inquiry: HP EliteBook 840" class="flip-cta">
+              <i data-lucide="message-circle" style="width:14px;height:14px;"></i> Inquire Now
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Dell Latitude -->
+      <div class="flip-wrap sr d2">
+        <div class="flip-inner">
+          <div class="flip-front" style="background:#141414;">
+            <div class="flip-hover-hint"><i data-lucide="rotate-cw" style="width:14px;height:14px;color:rgba(255,255,255,0.4);"></i></div>
+            <div class="flip-front-top">
+              <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="13" rx="2"/><path d="M8 21h8m-4-5v5"/></svg>
+            </div>
+            <div style="position:absolute;top:16px;left:16px;font-size:11px;font-weight:700;background:rgba(0,113,227,0.2);color:#60a5fa;padding:4px 10px;border-radius:980px;letter-spacing:0.04em;">★ TOP SELLER</div>
+            <div class="flip-brand-tag">Dell</div>
+            <div class="flip-name">Latitude 5400<br/>/ 7490</div>
+            <div class="flip-price-hint">From PKR 50,000</div>
+          </div>
+          <div class="flip-back" style="background:linear-gradient(135deg,#0060c7,#0071e3);">
+            <h3>Latitude 5400</h3>
+            <ul>
+              <li>Intel Core i5 8th Gen</li>
+              <li>16GB DDR4 RAM</li>
+              <li>NVMe SSD Storage</li>
+              <li>Corporate Security Chip</li>
+              <li>Docking Station Ready</li>
+            </ul>
+            <a href="https://wa.me/924044467725?text=Inquiry: Dell Latitude" class="flip-cta">
+              <i data-lucide="message-circle" style="width:14px;height:14px;"></i> Inquire Now
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Dell OptiPlex -->
+      <div class="flip-wrap sr d3">
+        <div class="flip-inner">
+          <div class="flip-front" style="background:#111;">
+            <div class="flip-hover-hint"><i data-lucide="rotate-cw" style="width:14px;height:14px;color:rgba(255,255,255,0.4);"></i></div>
+            <div class="flip-front-top">
+              <svg width="90" height="90" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <div class="flip-brand-tag">Dell</div>
+            <div class="flip-name">OptiPlex 7050<br/>Mini / SFF</div>
+            <div class="flip-price-hint">Bulk pricing available</div>
+          </div>
+          <div class="flip-back" style="background:linear-gradient(135deg,#0a3d2e,#0d5c44);">
+            <h3>OptiPlex 7050</h3>
+            <ul>
+              <li>Core i5 6th / 7th Gen</li>
+              <li>Micro & SFF form factor</li>
+              <li>Ideal for Schools & Banks</li>
+              <li>Low power consumption</li>
+              <li>Bulk order discounts</li>
+            </ul>
+            <a href="https://wa.me/924044467725?text=Inquiry: Dell OptiPlex bulk" class="flip-cta" style="color:#0d5c44;">
+              <i data-lucide="message-circle" style="width:14px;height:14px;"></i> Inquire Now
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- LAPTOPS -->
+<section id="laptops" class="sec" style="background:#f5f5f7;">
+  <div class="sec-inner">
+    <div class="sec-hdr sr">
+      <span class="eyebrow">Professional Business Laptops</span>
+      <h2 class="sec-h2">Elite. Latitude. ThinkPad.</h2>
+      <p class="sec-p">Engineered for corporate environments, schools, and power users. Every unit tested, every spec verified.</p>
+    </div>
+    <div class="pgrid">
+      <div class="pcard sr d1">
+        <div class="pcard-visual" style="background:linear-gradient(135deg,#eef2fa,#e4eaf5);">
+          <svg width="90" height="90" viewBox="0 0 24 24" fill="none" stroke="#b0bcd4" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="13" rx="2"/><path d="M8 21h8m-4-5v5"/></svg>
+          <span class="tag-pill tag-fresh">Fresh Import</span>
+        </div>
+        <div class="pcard-body">
+          <p class="pcard-brand">HP</p>
+          <h3 class="pcard-name">EliteBook 840 G5/G6</h3>
+          <div class="stock-row"><span class="stock-badge in" id="st-hp"><span class="sdot in"></span>In Stock</span><button class="stgl" onclick="toggleStock('st-hp')">toggle</button></div>
+          <p class="pcard-desc">Military-grade durability. Built for executives and field professionals who demand reliability.</p>
+          <div class="pcard-specs"><span class="spec">Core i5 8th Gen</span><span class="spec">8GB RAM</span><span class="spec">256GB SSD</span></div>
+        </div>
+        <div class="pcard-foot">
+          <div><div class="price-from">Starting from</div><div class="price-val">PKR 55,000</div></div>
+          <a href="https://wa.me/924044467725?text=Inquiry: HP EliteBook 840" class="btn-link">Inquire <i data-lucide="chevron-right" style="width:15px;height:15px;"></i></a>
+        </div>
+      </div>
+
+      <div class="pcard sr d2">
+        <div class="pcard-visual" style="background:linear-gradient(135deg,#edf3ff,#e0ecff);">
+          <svg width="90" height="90" viewBox="0 0 24 24" fill="none" stroke="#a0b4d4" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="13" rx="2"/><path d="M8 21h8m-4-5v5"/></svg>
+          <span class="tag-pill tag-blue">Top Seller</span>
+        </div>
+        <div class="pcard-body">
+          <p class="pcard-brand">Dell</p>
+          <h3 class="pcard-name">Latitude 5400 / 7490</h3>
+          <div class="stock-row"><span class="stock-badge in" id="st-dell"><span class="sdot in"></span>In Stock</span><button class="stgl" onclick="toggleStock('st-dell')">toggle</button></div>
+          <p class="pcard-desc">High-performance with 16GB RAM. The preferred choice of IT departments and corporate offices.</p>
+          <div class="pcard-specs"><span class="spec">Core i5 8th Gen</span><span class="spec">16GB RAM</span><span class="spec">NVMe SSD</span></div>
+        </div>
+        <div class="pcard-foot">
+          <div><div class="price-from">Price range</div><div class="price-val">PKR 50–65k</div></div>
+          <a href="https://wa.me/924044467725?text=Inquiry: Dell Latitude" class="btn-link">Inquire <i data-lucide="chevron-right" style="width:15px;height:15px;"></i></a>
+        </div>
+      </div>
+
+      <div class="pcard sr d3">
+        <div class="pcard-visual" style="background:linear-gradient(135deg,#f3eeff,#ebe0ff);">
+          <svg width="90" height="90" viewBox="0 0 24 24" fill="none" stroke="#c0a8e0" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="13" rx="2"/><path d="M8 21h8m-4-5v5"/></svg>
+          <span class="tag-pill tag-purple">Freelancer Pick</span>
+        </div>
+        <div class="pcard-body">
+          <p class="pcard-brand">Lenovo</p>
+          <h3 class="pcard-name">ThinkPad T480</h3>
+          <div class="stock-row"><span class="stock-badge in" id="st-tp"><span class="sdot in"></span>In Stock</span><button class="stgl" onclick="toggleStock('st-tp')">toggle</button></div>
+          <p class="pcard-desc">Legendary build quality with dual battery. The go-to for freelancers and developers.</p>
+          <div class="pcard-specs"><span class="spec">Core i5 8th Gen</span><span class="spec">Dual Battery</span><span class="spec">Robust Build</span></div>
+        </div>
+        <div class="pcard-foot">
+          <div><div class="price-from">Best for</div><div class="price-val" style="font-size:18px;">Freelancers</div></div>
+          <a href="https://wa.me/924044467725?text=Inquiry: ThinkPad T480" class="btn-link">Inquire <i data-lucide="chevron-right" style="width:15px;height:15px;"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div-line"></div>
+
+<!-- FEATURE STRIP -->
+<div class="feat-strip sr">
+  <div class="feat-grid">
+    <div class="feat-cell">
+      <div class="feat-icon"><i data-lucide="bar-chart-2" style="width:22px;height:22px;color:var(--blue);"></i></div>
+      <h4>Live Stock Count</h4>
+      <p>Real-time inventory display creates urgency. Customers act faster when they see limited units remaining.</p>
+    </div>
+    <div class="feat-cell">
+      <div class="feat-icon"><i data-lucide="file-down" style="width:22px;height:22px;color:var(--blue);"></i></div>
+      <h4>Generate Quote PDF</h4>
+      <p>Offices and schools generate a formal quotation instantly — ready to submit for procurement approval.</p>
+    </div>
+    <div class="feat-cell">
+      <div class="feat-icon"><i data-lucide="message-square" style="width:22px;height:22px;color:var(--blue);"></i></div>
+      <h4>WhatsApp Catalog</h4>
+      <p>One tap connects customers to your WhatsApp with product details pre-filled. Zero friction.</p>
+    </div>
+  </div>
+</div>
+
+<!-- COMPARISON TABLE -->
+<section class="cmp-sec">
+  <div class="sec-inner">
+    <div class="sec-hdr sr">
+      <span class="eyebrow">Why Computer Channel?</span>
+      <h2 class="sec-h2">We stand apart.</h2>
+      <p class="sec-p">See how Computer Channel compares to typical local shops and online resellers.</p>
+    </div>
+    <div class="cmp-table sr">
+      <div class="cmp-head">
+        <div class="cmp-head-cell">Feature</div>
+        <div class="cmp-head-cell us">Computer Channel</div>
+        <div class="cmp-head-cell">Local Shop / Reseller</div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-cell feature">Branded Stock (HP, Dell, Lenovo)</div>
+        <div class="cmp-cell us-val"><span class="cmp-yes">✓</span> &nbsp;100% Branded Only</div>
+        <div class="cmp-cell"><span class="cmp-partial">Sometimes</span></div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-cell feature">Fresh Imports & Open Box Units</div>
+        <div class="cmp-cell us-val"><span class="cmp-yes">✓</span> &nbsp;Always Available</div>
+        <div class="cmp-cell"><span class="cmp-no">✗</span></div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-cell feature">Bulk Order Pricing (Schools/Offices)</div>
+        <div class="cmp-cell us-val"><span class="cmp-yes">✓</span> &nbsp;Special Rates</div>
+        <div class="cmp-cell"><span class="cmp-partial">Rarely</span></div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-cell feature">Formal Quotation for Procurement</div>
+        <div class="cmp-cell us-val"><span class="cmp-yes">✓</span> &nbsp;PDF Ready</div>
+        <div class="cmp-cell"><span class="cmp-no">✗</span></div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-cell feature">Verified Specs Before Sale</div>
+        <div class="cmp-cell us-val"><span class="cmp-yes">✓</span> &nbsp;Every Unit Tested</div>
+        <div class="cmp-cell"><span class="cmp-partial">Varies</span></div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-cell feature">Workstations (Dell Precision / HP Z)</div>
+        <div class="cmp-cell us-val"><span class="cmp-yes">✓</span> &nbsp;In Stock</div>
+        <div class="cmp-cell"><span class="cmp-no">✗</span></div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-cell feature">WhatsApp Direct Inquiry</div>
+        <div class="cmp-cell us-val"><span class="cmp-yes">✓</span> &nbsp;Instant Response</div>
+        <div class="cmp-cell"><span class="cmp-partial">Sometimes</span></div>
+      </div>
+      <div class="cmp-row">
+        <div class="cmp-cell feature">Professional Monitors (IPS Panels)</div>
+        <div class="cmp-cell us-val"><span class="cmp-yes">✓</span> &nbsp;Dell UltraSharp, HP</div>
+        <div class="cmp-cell"><span class="cmp-no">✗</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESKTOPS -->
+<section id="desktops" class="sec" style="background:#000;">
+  <div class="sec-inner">
+    <div class="sec-hdr sr">
+      <span class="eyebrow">Branded Desktop PCs</span>
+      <h2 class="sec-h2 sec-h2-white">Mini. Tower. Precision.</h2>
+      <p class="sec-p sec-p-white">From compact micro-form desktops for schools to full workstations for video production.</p>
+    </div>
+    <div class="pgrid">
+      <div class="pcard pcard-dark sr d1">
+        <div class="pcard-visual" style="background:linear-gradient(135deg,#111827,#0d1525);">
+          <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#2a4a7a" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          <span class="tag-pill tag-green">Schools &amp; Banks</span>
+        </div>
+        <div class="pcard-body">
+          <p class="pcard-brand pcard-brand-w">Dell</p>
+          <h3 class="pcard-name pcard-name-w">OptiPlex 7050 / 5050</h3>
+          <p class="pcard-desc pcard-desc-w">Micro &amp; SFF form factor. Space-efficient and proven in institutional environments globally.</p>
+          <div class="pcard-specs"><span class="spec spec-d">Core i5 6th/7th Gen</span><span class="spec spec-d">Micro/SFF</span></div>
+        </div>
+        <div class="pcard-foot">
+          <div><div class="price-from price-from-w">Available in bulk</div><div class="price-val">Ask for Price</div></div>
+          <a href="https://wa.me/924044467725?text=Inquiry: Dell OptiPlex" class="btn-link">Inquire <i data-lucide="chevron-right" style="width:15px;height:15px;"></i></a>
+        </div>
+      </div>
+
+      <div class="pcard pcard-dark sr d2">
+        <div class="pcard-visual" style="background:linear-gradient(135deg,#101624,#080f1e);">
+          <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#2a4a7a" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div class="pcard-body">
+          <p class="pcard-brand pcard-brand-w">HP</p>
+          <h3 class="pcard-name pcard-name-w">ProDesk 600 G3</h3>
+          <p class="pcard-desc pcard-desc-w">The backbone of office computing. Trusted by enterprises worldwide for stable daily performance.</p>
+          <div class="pcard-specs"><span class="spec spec-d">Office Ready</span><span class="spec spec-d">Corporate Trusted</span></div>
+        </div>
+        <div class="pcard-foot">
+          <div><div class="price-from price-from-w">Office standard</div><div class="price-val">Ask for Price</div></div>
+          <a href="https://wa.me/924044467725?text=Inquiry: HP ProDesk 600" class="btn-link">Inquire <i data-lucide="chevron-right" style="width:15px;height:15px;"></i></a>
+        </div>
+      </div>
+
+      <div class="pcard pcard-dark sr d3">
+        <div class="pcard-visual" style="background:linear-gradient(135deg,#170d22,#0f0818);">
+          <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#5a3a8a" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>
+          <span class="tag-pill tag-purple">Workstation</span>
+        </div>
+        <div class="pcard-body">
+          <p class="pcard-brand pcard-brand-w">Dell</p>
+          <h3 class="pcard-name pcard-name-w">Precision Workstation</h3>
+          <p class="pcard-desc pcard-desc-w">Uncompromising power for video editing, 3D rendering, and professional graphic design.</p>
+          <div class="pcard-specs"><span class="spec spec-d">Video Editing</span><span class="spec spec-d">3D/Graphics</span><span class="spec spec-d">Pro Grade</span></div>
+        </div>
+        <div class="pcard-foot">
+          <div><div class="price-from price-from-w">Professional grade</div><div class="price-val">Ask for Price</div></div>
+          <a href="https://wa.me/924044467725?text=Inquiry: Dell Precision" class="btn-link">Inquire <i data-lucide="chevron-right" style="width:15px;height:15px;"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-sec sr">
+  <div class="sec-inner">
+    <div class="sec-hdr" style="margin-bottom:52px;">
+      <h2 class="sec-h2 sec-h2-white">Numbers that speak.</h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-cell sr d1"><span class="stat-n">500+</span><div class="stat-l">Units Delivered</div></div>
+      <div class="stat-cell sr d2"><span class="stat-n">4</span><div class="stat-l">Product Categories</div></div>
+      <div class="stat-cell sr d3"><span class="stat-n">3</span><div class="stat-l">Premium Brands</div></div>
+      <div class="stat-cell sr"><span class="stat-n">267B</span><div class="stat-l">High Street, Sahiwal</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- MONITORS -->
+<section id="monitors" class="sec" style="background:#fff;">
+  <div class="sec-inner">
+    <div class="sec-hdr sr">
+      <span class="eyebrow">Professional Displays</span>
+      <h2 class="sec-h2">See every detail.</h2>
+      <p class="sec-p">IPS panels with accurate colour. Trusted by designers, architects, and analysts.</p>
+    </div>
+    <div class="mgrid sr">
+      <div class="mcard">
+        <div class="m-icon"><i data-lucide="monitor-dot" style="width:34px;height:34px;color:var(--blue);"></i></div>
+        <div>
+          <h4>Dell UltraSharp 24"</h4>
+          <p>U2412M / U2415 — High-resolution IPS panel with exceptional colour accuracy. The preferred display of creative professionals and designers.</p>
+          <span class="m-badge">IPS · High Resolution</span>
+        </div>
+      </div>
+      <div class="mcard">
+        <div class="m-icon"><i data-lucide="monitor" style="width:34px;height:34px;color:var(--blue);"></i></div>
+        <div>
+          <h4>HP EliteDisplay</h4>
+          <p>Ergonomic adjustable stand with pivot, tilt, and height adjustment. Built for long work sessions in professional office environments.</p>
+          <span class="m-badge">Adjustable · Ergonomic</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div-line"></div>
+
+<!-- ACCESSORIES -->
+<section id="accessories" class="sec" style="background:#000;">
+  <div class="sec-inner">
+    <div class="sec-hdr sr">
+      <span class="eyebrow">Accessories</span>
+      <h2 class="sec-h2 sec-h2-white">Every accessory.<br/>Bulk ready.</h2>
+      <p class="sec-p sec-p-white">Original branded accessories sourced directly — perfect for bulk office deployments.</p>
+    </div>
+    <div class="agrid sr">
+      <div class="acard d1">
+        <div class="a-icon"><i data-lucide="zap" style="width:28px;height:28px;color:#fbbf24;"></i></div>
+        <h4>Original Chargers</h4>
+        <p>Genuine Dell &amp; HP power adapters. Warranty-safe and voltage-tested with bulk pricing available.</p>
+      </div>
+      <div class="acard d2">
+        <div class="a-icon"><i data-lucide="keyboard" style="width:28px;height:28px;color:var(--blue);"></i></div>
+        <h4>Wireless KB &amp; Mouse</h4>
+        <p>Ergonomic combo sets. Ideal for bulk office or school deployments with consistent performance.</p>
+      </div>
+      <div class="acard d3">
+        <div class="a-icon"><i data-lucide="briefcase" style="width:28px;height:28px;color:#34d399;"></i></div>
+        <h4>Laptop Backpacks</h4>
+        <p>Branded padded backpacks. Water resistant and designed for professionals on the move.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="reviews" class="testi-sec">
+  <div class="sec-inner">
+    <div class="sec-hdr sr">
+      <span class="eyebrow">Trusted By Sahiwal</span>
+      <h2 class="sec-h2">What our customers say.</h2>
+      <p class="sec-p">From freelancers to government offices — they all trust Computer Channel.</p>
+    </div>
+
+    <!-- TRUST BADGES -->
+    <div class="trust-logos sr">
+      <div class="trust-logo">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        HP Certified
+      </div>
+      <div class="trust-logo">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Dell Authorized
+      </div>
+      <div class="trust-logo">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        Lenovo Partner
+      </div>
+      <div class="trust-logo">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        500+ Happy Clients
+      </div>
+      <div class="trust-logo">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        Warranty Assured
+      </div>
+    </div>
+
+    <!-- REVIEWS -->
+    <div class="testi-grid">
+      <div class="testi-card sr d1">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Humne school ke liye 30 Dell OptiPlex liye — price best thi, delivery time pe thi aur har machine perfectly working. Computer Channel pe full trust hai."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#0071e3,#0060c7);">A</div>
+          <div>
+            <div class="testi-name">Ahmad Raza</div>
+            <div class="testi-role">Principal, Sahiwal Grammar School</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card sr d2">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"ThinkPad T480 liya freelancing ke liye — dual battery game changer hai. Bhai ne personally check karke diya. Bilkul sahi machine hai."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#7c3aed,#6d28d9);">Z</div>
+          <div>
+            <div class="testi-name">Zain ul Abideen</div>
+            <div class="testi-role">Freelance Developer, Sahiwal</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card sr d3">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Office ke liye HP EliteBook aur Dell monitors liye. Quotation bhi ready milti hai jaldi — accounts department ke liye bohot convenient. Recommend karta hoon."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#16a34a,#15803d);">M</div>
+          <div>
+            <div class="testi-name">Muhammad Usman</div>
+            <div class="testi-role">IT Manager, Sahiwal Bank Branch</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-sec">
+  <div class="sec-inner">
+    <div class="sec-hdr sr">
+      <span class="eyebrow">Got Questions?</span>
+      <h2 class="sec-h2">Frequently Asked.</h2>
+      <p class="sec-p">Har cheez clear — koi confusion nahi.</p>
+    </div>
+    <div class="faq-list sr">
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Kya aap sirf Sahiwal mein deliver karte hain ya bahar bhi?</span>
+          <span class="faq-icon"><i data-lucide="plus" style="width:15px;height:15px;"></i></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Hum primarily Sahiwal city mein serve karte hain, lekin bulk orders ke liye Punjab ke doosre shehron mein bhi arrangement ho sakti hai. WhatsApp par baat karein aur hum best solution nikal lenge.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Open Box aur Fresh Import mein kya farq hai?</span>
+          <span class="faq-icon"><i data-lucide="plus" style="width:15px;height:15px;"></i></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner"><strong>Open Box:</strong> Packing khuli ho sakti hai lekin machine bilkul new condition mein hoti hai — kabhi use nahi hui. <strong>Fresh Import:</strong> Seedha abroad se aayi, sealed packaging, zero use. Dono par warranty milti hai.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">School ya government office ke liye formal quotation milegi?</span>
+          <span class="faq-icon"><i data-lucide="plus" style="width:15px;height:15px;"></i></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Bilkul! Hum properly formatted PDF quotation dete hain jis mein item list, specs, prices, aur stamp/signature hoti hai. Yeh procurement departments aur school committees ke liye directly acceptable hoti hai.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Kitni units se bulk order start hoti hai?</span>
+          <span class="faq-icon"><i data-lucide="plus" style="width:15px;height:15px;"></i></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">5 units se bulk pricing start hoti hai. 10+ units par special discount milta hai aur 30+ units par dedicated delivery + setup support bhi available hai. WhatsApp par quantity batayein aur hum custom quote karenge.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Warranty kitni milti hai aur claim kaise karte hain?</span>
+          <span class="faq-icon"><i data-lucide="plus" style="width:15px;height:15px;"></i></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Har machine par manufacturer warranty hoti hai (HP/Dell/Lenovo ki official warranty). Claim ke liye seedha humari shop par aa jain — hum process guide karte hain. Local support ka faida yahi hai.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Kya installment ya advance payment ka option hai?</span>
+          <span class="faq-icon"><i data-lucide="plus" style="width:15px;height:15px;"></i></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Bulk corporate orders ke liye 50% advance aur 50% delivery pe arrangement ho sakti hai. Individual purchases ke liye shop par aake baat karein — hum flexible hain.</div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SPEC COMPARISON TOOL -->
+<section class="spc-sec">
+  <div class="sec-inner">
+    <div class="sec-hdr sr">
+      <span class="eyebrow">Spec Comparison Tool</span>
+      <h2 class="sec-h2">Compare side by side.</h2>
+      <p class="sec-p">Do products choose karo aur specs ek saath compare karo — decision easy ho jata hai.</p>
+    </div>
+    <div class="spec-cmp-wrap sr">
+      <div class="spc-selects">
+        <select id="spc-left" onchange="renderCmp()">
+          <option value="elitebook">HP EliteBook 840 G5/G6</option>
+          <option value="latitude">Dell Latitude 5400/7490</option>
+          <option value="thinkpad">Lenovo ThinkPad T480</option>
+          <option value="optiplex">Dell OptiPlex 7050</option>
+          <option value="prodesk">HP ProDesk 600 G3</option>
+        </select>
+        <div class="vs-ball">VS</div>
+        <select id="spc-right" onchange="renderCmp()">
+          <option value="latitude">Dell Latitude 5400/7490</option>
+          <option value="elitebook">HP EliteBook 840 G5/G6</option>
+          <option value="thinkpad">Lenovo ThinkPad T480</option>
+          <option value="optiplex">Dell OptiPlex 7050</option>
+          <option value="prodesk">HP ProDesk 600 G3</option>
+        </select>
+      </div>
+      <div class="spec-cmp-grid" id="spc-grid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec sr">
+  <div class="sec-inner">
+    <span class="eyebrow" style="display:block;margin-bottom:16px;">Ready to order?</span>
+    <h2>Get a formal quote<br/>in minutes.</h2>
+    <p>Send your requirements on WhatsApp or call the shop. Bulk orders, custom configurations, and institutional quotations all welcome.</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/924044467725" class="btn btn-blue" style="font-size:17px;padding:14px 28px;"><i data-lucide="message-circle" style="width:18px;height:18px;"></i> WhatsApp Now</a>
+      <a href="tel:+924044467725" class="btn btn-outline-white" style="font-size:17px;padding:14px 28px;"><i data-lucide="phone" style="width:18px;height:18px;"></i> Call the Shop</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-sec">
+  <div class="sec-inner">
+    <div class="sec-hdr sr">
+      <span class="eyebrow">Find Us</span>
+      <h2 class="sec-h2">Visit the store.</h2>
+    </div>
+  </div>
+  <div class="c-grid">
+    <div class="c-cell sr d1">
+      <div class="c-icon-w"><i data-lucide="map-pin" style="width:20px;height:20px;color:var(--blue);"></i></div>
+      <h4>Address</h4>
+      <p>267/B-II, High Street<br/>Sahiwal, Punjab, Pakistan</p>
+    </div>
+    <div class="c-cell sr d2">
+      <div class="c-icon-w"><i data-lucide="phone" style="width:20px;height:20px;color:var(--blue);"></i></div>
+      <h4>Phone &amp; WhatsApp</h4>
+      <a href="tel:+924044467725">+92 40 4467725</a><br/>
+      <a href="https://wa.me/924044467725">WhatsApp Chat</a>
+    </div>
+    <div class="c-cell sr d3">
+      <div class="c-icon-w"><i data-lucide="clock" style="width:20px;height:20px;color:var(--blue);"></i></div>
+      <h4>Store Hours</h4>
+      <p>Mon – Sat: 10am – 8pm<br/>Near GPO / Fawara Chowk</p>
+    </div>
+  </div>
+  <!-- GOOGLE MAP -->
+  <div class="map-wrap sr" style="margin-top:48px;">
+    <div class="map-overlay-badge">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      267/B-II High Street, Sahiwal
+    </div>
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3403.0!2d73.1!3d30.67!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sHigh+Street+Sahiwal!5e0!3m2!1sen!2spk!4v1234567890"
+      allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+      title="Computer Channel Sahiwal Location">
+    </iframe>
+  </div>
+</section>
+<footer>
+  <div class="foot-inner">
+    <span class="foot-copy">Copyright &copy; 2025 Computer Channel Sahiwal. All rights reserved.</span>
+    <div class="foot-links">
+      <a href="#laptops">Laptops</a>
+      <a href="#desktops">Desktops</a>
+      <a href="#monitors">Monitors</a>
+      <a href="#accessories">Accessories</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── PAGE LOADER ──────────────────────────────────
+  const lbar=document.getElementById('lbar'),lpct=document.getElementById('lpct'),loader=document.getElementById('page-loader');
+  let pct=0;
+  const interval=setInterval(()=>{pct+=Math.random()*18+5;if(pct>=100){pct=100;clearInterval(interval);setTimeout(()=>loader.classList.add('hide'),200);}lbar.style.width=pct+'%';lpct.textContent=Math.floor(pct)+'%';},80);
+
+  // ── LUCIDE ───────────────────────────────────────
+  lucide.createIcons();
+
+  // ── SCROLL REVEAL ────────────────────────────────
+  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target);}});},{threshold:0.1});
+  document.querySelectorAll('.sr').forEach(el=>obs.observe(el));
+
+  // ── TYPEWRITER (one word only) ───────────────────
+  const twEl=document.getElementById('typewriter-text');
+  const twWords=['Provider','Partner','Solution','Expert','Store'];
+  let twIdx=0,twChar=0,twDeleting=false;
+  function typeLoop(){
+    const word=twWords[twIdx];
+    if(!twDeleting){twEl.textContent=word.slice(0,++twChar);if(twChar===word.length){twDeleting=true;setTimeout(typeLoop,2000);return;}}
+    else{twEl.textContent=word.slice(0,--twChar);if(twChar===0){twDeleting=false;twIdx=(twIdx+1)%twWords.length;}}
+    setTimeout(typeLoop,twDeleting?55:95);
+  }
+  setTimeout(typeLoop,1400);
+
+  // ── PARALLAX HERO ────────────────────────────────
+  window.addEventListener('scroll',()=>{
+    const s=window.scrollY;
+    const bg=document.getElementById('parallax-bg');
+    const h1=document.getElementById('parallax-h1');
+    const pt=document.getElementById('parallax-text');
+    if(bg) bg.style.transform=`translateY(${s*0.4}px)`;
+    if(h1) h1.style.transform=`translateY(${s*0.18}px)`;
+    if(pt) pt.style.transform=`translateY(${s*0.12}px)`;
+  },{passive:true});
+
+  // ── CONFETTI ─────────────────────────────────────
+  function fireConfetti(e){
+    const colors=['#0071e3','#34d399','#fbbf24','#f87171','#a78bfa','#60a5fa','#fff'];
+    const cx=e?e.clientX:window.innerWidth/2;
+    const cy=e?e.clientY:window.innerHeight/2;
+    for(let i=0;i<55;i++){
+      const p=document.createElement('div');
+      p.className='cp';
+      const size=Math.random()*8+5;
+      p.style.cssText=`left:${cx+( Math.random()-0.5)*120}px;top:${cy}px;width:${size}px;height:${size}px;background:${colors[Math.floor(Math.random()*colors.length)]};border-radius:${Math.random()>0.5?'50%':'2px'};animation-duration:${Math.random()*1.2+0.8}s;animation-delay:${Math.random()*0.3}s;`;
+      document.body.appendChild(p);
+      setTimeout(()=>p.remove(),2200);
+    }
+  }
+
+  // ── STOCK TOGGLE ─────────────────────────────────
+  function toggleStock(id){
+    const el=document.getElementById(id);
+    const dot=el.querySelector('.sdot');
+    const isIn=el.classList.contains('in');
+    el.classList.toggle('in',!isIn);
+    el.classList.toggle('out',isIn);
+    dot.classList.toggle('in',!isIn);
+    dot.classList.toggle('out',isIn);
+    el.innerHTML=`<span class="sdot ${isIn?'out':'in'}"></span>${isIn?'Out of Stock':'In Stock'}`;
+  }
+
+  // ── SPEC COMPARISON DATA ─────────────────────────
+  const products={
+    elitebook:{brand:'HP',name:'EliteBook 840 G5/G6',price:'PKR 55,000 – 70,000',specs:[
+      {l:'Processor',v:'Core i5 8th Gen',tier:'good'},{l:'RAM',v:'8GB DDR4',tier:''},{l:'Storage',v:'256GB SSD',tier:''},{l:'Display',v:'14" FHD IPS',tier:'good'},{l:'Battery',v:'Single 56Wh',tier:''},{l:'Build',v:'Military-grade',tier:'best'},{l:'Weight',v:'~1.48 kg',tier:''},{l:'Best For',v:'Executives',tier:''}
+    ]},
+    latitude:{brand:'Dell',name:'Latitude 5400/7490',price:'PKR 50,000 – 65,000',specs:[
+      {l:'Processor',v:'Core i5 8th Gen',tier:'good'},{l:'RAM',v:'16GB DDR4',tier:'best'},{l:'Storage',v:'NVMe SSD',tier:'best'},{l:'Display',v:'14" FHD',tier:''},{l:'Battery',v:'Single 68Wh',tier:'good'},{l:'Build',v:'Corporate Grade',tier:''},{l:'Weight',v:'~1.56 kg',tier:''},{l:'Best For',v:'IT Depts/Offices',tier:''}
+    ]},
+    thinkpad:{brand:'Lenovo',name:'ThinkPad T480',price:'Ask on WhatsApp',specs:[
+      {l:'Processor',v:'Core i5 8th Gen',tier:'good'},{l:'RAM',v:'8–16GB DDR4',tier:'good'},{l:'Storage',v:'256GB SSD',tier:''},{l:'Display',v:'14" FHD IPS',tier:'good'},{l:'Battery',v:'Dual Battery',tier:'best'},{l:'Build',v:'ThinkPad Iconic',tier:'best'},{l:'Weight',v:'~1.58 kg',tier:''},{l:'Best For',v:'Freelancers/Dev',tier:''}
+    ]},
+    optiplex:{brand:'Dell',name:'OptiPlex 7050/5050',price:'Bulk Pricing Available',specs:[
+      {l:'Processor',v:'Core i5 6/7th Gen',tier:''},{l:'RAM',v:'8GB DDR4',tier:''},{l:'Storage',v:'256GB SSD/HDD',tier:''},{l:'Form Factor',v:'Micro / SFF',tier:'best'},{l:'Power Use',v:'Low (65W)',tier:'best'},{l:'Build',v:'Institutional Grade',tier:'good'},{l:'Ideal For',v:'Schools / Banks',tier:'best'},{l:'Type',v:'Desktop PC',tier:''}
+    ]},
+    prodesk:{brand:'HP',name:'ProDesk 600 G3',price:'Ask on WhatsApp',specs:[
+      {l:'Processor',v:'Core i5 7th Gen',tier:''},{l:'RAM',v:'8GB DDR4',tier:''},{l:'Storage',v:'256GB SSD',tier:''},{l:'Form Factor',v:'Tower / SFF',tier:'good'},{l:'Power Use',v:'Medium (90W)',tier:''},{l:'Build',v:'Corporate Standard',tier:'good'},{l:'Ideal For',v:'Office Workstations',tier:'best'},{l:'Type',v:'Desktop PC',tier:''}
+    ]}
+  };
+
+  function renderCmp(){
+    const lk=document.getElementById('spc-left').value;
+    const rk=document.getElementById('spc-right').value;
+    const grid=document.getElementById('spc-grid');
+    [lk,rk].forEach((k,i)=>{
+      const p=products[k];
+      const card=grid.children[i]||(()=>{const c=document.createElement('div');c.className='spc-card';grid.appendChild(c);return c;})();
+      card.innerHTML=`<div class="spc-card-head"><div class="spc-brand">${p.brand}</div><div class="spc-name">${p.name}</div><div class="spc-price">${p.price}</div></div><div class="spc-rows">${p.specs.map(s=>`<div class="spc-row"><span class="spc-lbl">${s.l}</span><span class="spc-val ${s.tier}">${s.v}</span></div>`).join('')}</div><div class="spc-foot"><a href="https://wa.me/924044467725?text=Inquiry: ${encodeURIComponent(p.name)}" class="btn-link" style="font-size:14px;">Inquire <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a></div>`;
+    });
+  }
+  renderCmp();
+
+  // ── NAV LIGHT/DARK ───────────────────────────────
+  const nav=document.getElementById('nav');
+  window.addEventListener('scroll',()=>{
+    let light=false;
+    document.querySelectorAll('.faq-sec,.testi-sec,.cmp-sec,.spc-sec,#laptops,#monitors,#reviews,#contact').forEach(el=>{
+      const r=el.getBoundingClientRect();if(r.top<=52&&r.bottom>=52)light=true;
+    });
+    nav.classList.toggle('light',light);
+  },{passive:true});
+
+  // ── FAQ ──────────────────────────────────────────
+  function toggleFaq(btn){
+    const item=btn.closest('.faq-item'),isOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+    if(!isOpen)item.classList.add('open');
+    lucide.createIcons();
+  }
+
+  // ── STICKY + BTT ─────────────────────────────────
+  const stickyBar=document.getElementById('sticky-bar'),bttBtn=document.getElementById('btt');
+  window.addEventListener('scroll',()=>{
+    if(stickyBar)stickyBar.style.display=window.scrollY>300?'flex':'none';
+    if(bttBtn)bttBtn.classList.toggle('show',window.scrollY>600);
+  },{passive:true});
+
+  // ── DARK MODE ────────────────────────────────────
+  const moonIcon=document.getElementById('dm-moon'),sunIcon=document.getElementById('dm-sun');
+  let dark=localStorage.getItem('cc-dark')==='1';
+  function applyDark(d){document.body.classList.toggle('dark-mode',d);if(moonIcon)moonIcon.style.display=d?'none':'block';if(sunIcon)sunIcon.style.display=d?'block':'none';}
+  applyDark(dark);
+  function toggleDark(){dark=!dark;localStorage.setItem('cc-dark',dark?'1':'0');applyDark(dark);}
+
+  // ── COOKIE ───────────────────────────────────────
+  const cb=document.getElementById('cookie-banner');
+  if(!localStorage.getItem('cc-cookie'))setTimeout(()=>{if(cb)cb.classList.add('show');},2500);
+  function hideCookie(){if(cb)cb.classList.remove('show');localStorage.setItem('cc-cookie','1');}
+</script>
+</body>
+</html>
