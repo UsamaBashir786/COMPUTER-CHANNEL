@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Computer Panel — Sahiwal</title>
+<title>Computer Channel — Sahiwal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
@@ -774,7 +774,7 @@ body.dark-mode .sp-name{color:#f5f5f7;}
 <div id="page-loader">
   <div class="loader-logo">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-    Computer Panel
+    Computer Channel
   </div>
   <div class="loader-bar-wrap"><div class="loader-bar" id="lbar"></div></div>
   <div class="loader-pct" id="lpct">0%</div>
@@ -790,7 +790,7 @@ body.dark-mode .sp-name{color:#f5f5f7;}
   <div class="nav-inner">
     <a class="nav-logo" href="#">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-      Computer Panel
+      Computer Channel
     </a>
     <ul class="nav-links">
       <li><a href="#laptops">Laptops</a></li>
@@ -808,7 +808,7 @@ body.dark-mode .sp-name{color:#f5f5f7;}
 <section id="hero">
   <!-- <canvas id="particle-canvas"></canvas> -->
   <div class="parallax-layer" id="parallax-bg" style="position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(0,113,227,0.2) 0%,transparent 65%);pointer-events:none;z-index:1;"></div>
-  <p class="hero-eyebrow parallax-layer" id="parallax-text" style="position:relative;z-index:2;">Computer Panel Sahiwal</p>
+  <p class="hero-eyebrow parallax-layer" id="parallax-text" style="position:relative;z-index:2;">Computer Channel Sahiwal</p>
   <h1 class="hero-h1 parallax-layer" id="parallax-h1" style="position:relative;z-index:2;">The IT Solutions<br/><span id="typewriter-text">Provider</span><span class="typewriter-cursor"></span>.</h1>
   <p class="hero-sub parallax-layer" style="position:relative;z-index:2;">Your Trusted Partner for Branded Laptops &amp; Workstations in Sahiwal. Corporate-grade hardware. Fresh imports. Bulk orders welcome.</p>
   <div class="hero-btns parallax-layer" style="position:relative;z-index:2;">
@@ -1034,14 +1034,14 @@ body.dark-mode .sp-name{color:#f5f5f7;}
 <section class="cmp-sec">
   <div class="sec-inner">
     <div class="sec-hdr sr">
-      <span class="eyebrow">Why Computer Panel?</span>
+      <span class="eyebrow">Why Computer Channel?</span>
       <h2 class="sec-h2">We stand apart.</h2>
-      <p class="sec-p">See how Computer Panel compares to typical local shops and online resellers.</p>
+      <p class="sec-p">See how Computer Channel compares to typical local shops and online resellers.</p>
     </div>
     <div class="cmp-table sr">
       <div class="cmp-head">
         <div class="cmp-head-cell">Feature</div>
-        <div class="cmp-head-cell us">Computer Panel</div>
+        <div class="cmp-head-cell us">Computer Channel</div>
         <div class="cmp-head-cell">Local Shop / Reseller</div>
       </div>
       <div class="cmp-row">
@@ -1230,7 +1230,7 @@ body.dark-mode .sp-name{color:#f5f5f7;}
     <div class="sec-hdr sr">
       <span class="eyebrow">Trusted By Sahiwal</span>
       <h2 class="sec-h2">What our customers say.</h2>
-      <p class="sec-p">From freelancers to government offices — they all trust Computer Panel.</p>
+      <p class="sec-p">From freelancers to government offices — they all trust Computer Channel.</p>
     </div>
 
     <!-- TRUST BADGES -->
@@ -1261,7 +1261,7 @@ body.dark-mode .sp-name{color:#f5f5f7;}
     <div class="testi-grid">
       <div class="testi-card sr d1">
         <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">"Humne school ke liye 30 Dell OptiPlex liye — price best thi, delivery time pe thi aur har machine perfectly working. Computer Panel pe full trust hai."</p>
+        <p class="testi-text">"Humne school ke liye 30 Dell OptiPlex liye — price best thi, delivery time pe thi aur har machine perfectly working. Computer Channel pe full trust hai."</p>
         <div class="testi-author">
           <div class="testi-avatar" style="background:linear-gradient(135deg,#0071e3,#0060c7);">A</div>
           <div>
@@ -1437,13 +1437,13 @@ body.dark-mode .sp-name{color:#f5f5f7;}
     <iframe
       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3403.0!2d73.1!3d30.67!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sHigh+Street+Sahiwal!5e0!3m2!1sen!2spk!4v1234567890"
       allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-      title="Computer Panel Sahiwal Location">
+      title="Computer Channel Sahiwal Location">
     </iframe>
   </div>
 </section>
 <footer>
   <div class="foot-inner">
-    <span class="foot-copy">Copyright &copy; 2025 Computer Panel Sahiwal. All rights reserved.</span>
+    <span class="foot-copy">Copyright &copy; 2025 Computer Channel Sahiwal. All rights reserved.</span>
     <div class="foot-links">
       <a href="#laptops">Laptops</a>
       <a href="#desktops">Desktops</a>
